@@ -1,4 +1,4 @@
-class cron {
+class cron ($run_parts_hour = 20) {
   include monit
 
   $pid_file = '/var/run/crond.pid'
@@ -13,6 +13,10 @@ class cron {
     hasstatus  => true,
     hasrestart => true,
     require    => Package['cron']
+  }
+
+  file { '/etc/crontab':
+    content => template('cron/crontab.erb')
   }
 
   monit::conf { 'cron':

@@ -1,4 +1,6 @@
 class cron ($run_parts_hour = 20) {
+  include monit
+
   $pid_file = '/var/run/crond.pid'
 
   package { 'cron':
